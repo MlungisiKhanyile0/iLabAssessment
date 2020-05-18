@@ -2,10 +2,8 @@ import PageObjects.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.testng.annotations.*;
 
 import java.io.*;
 import java.util.Properties;
@@ -42,6 +40,13 @@ public class WholeWebsite {
             System.setProperty("webdriver.gecko.driver",driverPath);
             driver = new FirefoxDriver();
         }
+        else if (browser.equalsIgnoreCase("IE")) {
+            String driverPath = properties.getProperty("IEDriverPath");
+            // Reading Property files
+            System.setProperty("webdriver.ie.driver",driverPath);
+            driver = new InternetExplorerDriver();
+        }
+
         driver.get(url);
         // con.webdriverCon(driver);
         driver.manage().window().maximize();
@@ -91,13 +96,13 @@ public class WholeWebsite {
       carpg.testValidation(driver);
      }
 
-//     @AfterMethod
-//        public void teardown()
-//        {
-//      Go to home page
-//        manuCls.clickLogo(driver);
-//        this.driver.quit();
-//        }
+    @AfterClass
+        public void teardown()
+        {
+     // Go to home page
+        manuCls.clickLogo(driver);
+        this.driver.quit();
+        }
     }
 
 

@@ -2,6 +2,7 @@ package PageObjects;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -26,6 +27,10 @@ public class Manubar {
     public void clickCareerBtn(WebDriver driver)
     {
         this.driver= driver;
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        js.executeScript("scroll(250, 0)");
+        js.executeScript("scroll(0, 250)");
+
         driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         WebElement careered = driver.findElement(careebtnLocatore);
         careered.click();
