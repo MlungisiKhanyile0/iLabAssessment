@@ -21,8 +21,8 @@ public class Manubar {
     {
     this.driver= driver;
     driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
-    WebElement closeAlert = driver.findElement(closePopup);
-    closeAlert.click();
+    //WebElement closeAlert = driver.findElement(closePopup);
+    //closeAlert.click();
     }
     public void clickCareerBtn(WebDriver driver)
     {

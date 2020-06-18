@@ -12,17 +12,19 @@ public class WholeWebsite {
     WebDriver driver;
     Manubar manuCls = new Manubar();
     CareerPage carpg = new CareerPage();
+    ReadPropertyFile raedFile = new ReadPropertyFile();
 
     private final String propertyFilePath = "C://Users//Mlungisi Khanyile//IdeaProjects//iLabAssessment//src//test//java//Utility//config.properties";
 
+    public WholeWebsite() throws FileNotFoundException {
+    }
     @Parameters({"browser"})
 
    @BeforeTest
 
     public void connectWebdriver(String browser) throws Exception {
 
-         Properties properties =new  Properties();
-
+        Properties properties =new  Properties();
         InputStream is = new FileInputStream(propertyFilePath);
         properties.load(is);
         is.close();
@@ -54,55 +56,36 @@ public class WholeWebsite {
 
     // click career button button
     @Test(priority = 1)
-    public void CareerBtn()
-    {
+    public void CareerAplication() throws IOException {
         // click career button button
         manuCls.CloseIframe(driver);
         manuCls.clickCareerBtn(driver);
-    }
-    //Career page
-    @Test(priority = 2)
-    public void CareerApplication()
-    {
 
+        //Career page
         carpg.choosLink(driver);
         carpg.jobselect(driver);
-    }
 
-    //apply online
-        @Test(priority = 3)
-    public void applyonline()
-     {
+        //apply online
         carpg.setApplybtn(driver);
-        carpg.setApplycantName(driver,"Mlungisi");
-        carpg.setApplycantEmail(driver,"automationAssessment@iLABQuality.com");
-     }
-     //enter cellnumber
-    @Test(priority = 4)
-    public void entercellNo() {
-        carpg.createRandomInteger(driver,9);
+        carpg.setApplycantName(driver, "Mlungisi");
+        carpg.setApplycantEmail(driver, "automationAssessment@iLABQuality.com");
+
+        //enter cellnumber
+        carpg.createRandomInteger(driver, 9);
+        //click submit application button
+
+        carpg.submitbtn(driver);
+        //Test verification
+
+        carpg.testValidation(driver);
     }
-     //click submit application button
-
-     @Test(priority = 5)
-     public void submitbutton()
-     {
-         carpg.submitbtn(driver);
-     }
-     //Test verification
-     @Test(priority = 6)
-    public void testValidation()
-     {
-      carpg.testValidation(driver);
-     }
-
-    @AfterClass
+   /* @AfterClass
         public void teardown()
         {
      // Go to home page
         manuCls.clickLogo(driver);
         this.driver.quit();
-        }
+        }*/
     }
 
 
